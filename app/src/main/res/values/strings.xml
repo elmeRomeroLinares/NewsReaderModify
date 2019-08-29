@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">NewsReader</string>
+    <string name="no_result">No Result</string>
+    <string name="no_internet_connection">No Internet Connection,\n To See Saved News Tap Read Later Tab</string>
+    <string name="view_in_browser">View in Browser</string>
+    <string name="article_thumbnail">This is the article thumbnail</string>
+    <string name="save">SAVE</string>
+    <string name="editor_insert_article_failed">Fail to Save Article</string>
+    <string name="editor_insert_article_successful">Successfully Added</string>
+    <string name="delete_button">DELETE</string>
+    <string name="delete_failed">Delete Failed</string>
+    <string name="delete_successful">Delete Successful</string>
+    <string name="search">Search</string>
 </resources>

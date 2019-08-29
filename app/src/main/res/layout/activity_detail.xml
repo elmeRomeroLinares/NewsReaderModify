@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
         android:id="@+id/article_header"
         android:layout_width="match_parent"
@@ -11,7 +10,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:gravity="center_vertical"
         android:layout_margin="16dp" />
-
     <FrameLayout
         android:id="@+id/fragment_frame"
         android:layout_width="match_parent"
