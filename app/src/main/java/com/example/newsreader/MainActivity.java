@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.newsreader.fragment.GeneralPagerFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
@@ -30,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tab_layout)
     TabLayout mTabNewsCategories;
 
-    private CategoriesPagerAdapter mCategoriesPA;
-
     public static final String DAYNIGHT = "DAY_NIGHT";
 
     @Override
@@ -41,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        //TODO new listener to kmow when tab was selected and perform read later refresh
+        //TODO new listener to know when tab was selected and perform read later refresh
         mNewsCategoriesVP.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -53,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 if (position == 5) {
                     Fragment page = getSupportFragmentManager().
                             findFragmentByTag("android:switcher:" + R.id.pager + ":" + position);
-                    ((GeneralPagerFragment) page).reload();
+                    if (page != null) {
+                        ((GeneralPagerFragment) page).reload();
+                    }
                 }
             }
 
@@ -63,12 +61,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // News pager adapter object
-        mCategoriesPA =
-                new CategoriesPagerAdapter(getSupportFragmentManager());
-
         // Setup Pager with Tab
-        mNewsCategoriesVP.setAdapter(mCategoriesPA);
+        mNewsCategoriesVP.setAdapter(new CategoriesPagerAdapter(getSupportFragmentManager()));
         mTabNewsCategories.setupWithViewPager(mNewsCategoriesVP);
     }
 
@@ -101,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 // We don't know what mode we're in, assume notnight
                 break;
         }
-        editor.commit();
+        editor.apply();
         recreate();
     }
 }

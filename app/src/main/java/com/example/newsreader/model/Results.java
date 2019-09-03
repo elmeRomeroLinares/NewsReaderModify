@@ -11,7 +11,7 @@ public class Results implements Parcelable {
 
     private Fields fields;
 
-    public Results(String sectionName, String webUrl, Fields fields) {
+    Results(String sectionName, String webUrl, Fields fields) {
         this.sectionName = sectionName;
         this.webUrl = webUrl;
         this.fields = fields;

@@ -8,16 +8,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 public class CoreApp extends Application {
 
-    private static CoreApp myApplication;
-
-    public static CoreApp getInstance(){
-        return myApplication;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        myApplication = this;
+        CoreApp myApplication = this;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 

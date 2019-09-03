@@ -8,6 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.example.newsreader.data.NewsContract.NewsEntry;
 
 public class NewsContentProvider extends ContentProvider {
@@ -36,7 +39,7 @@ public class NewsContentProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         // Readable Data base
         SQLiteDatabase rDatabase = mNewsDbHelper.getReadableDatabase();
@@ -65,7 +68,7 @@ public class NewsContentProvider extends ContentProvider {
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case NEWS:
@@ -78,7 +81,7 @@ public class NewsContentProvider extends ContentProvider {
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         final int match = sUriMatcher.match(uri);
         if (match == NEWS) {
             return insertArticle(uri, contentValues);
@@ -123,7 +126,7 @@ public class NewsContentProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         // get writable database
         SQLiteDatabase wDatabase = mNewsDbHelper.getWritableDatabase();
 
@@ -142,7 +145,7 @@ public class NewsContentProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String s, String[] strings) {
         return 0;
     }
 }

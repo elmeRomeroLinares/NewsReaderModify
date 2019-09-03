@@ -43,7 +43,9 @@ public class DetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // get information from intent extras
         mdata = getIntent().getParcelableExtra(DETAILBUNDLE);

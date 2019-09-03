@@ -6,7 +6,7 @@ public class Results_ {
 
     private List<Results> results;
 
-    public Results_(List<Results> results) {
+    Results_(List<Results> results) {
         this.results = results;
     }
 

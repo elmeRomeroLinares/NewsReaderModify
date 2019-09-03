@@ -17,13 +17,13 @@ public class CategoriesPagerAdapter extends FragmentPagerAdapter {
     private static final String THIRD_CATEGORY = "Business";
     private static final String FOURTH_CATEGORY = "World news";
     private static final String FIFTH_CATEGORY = "Film";
-    public static final String SIXTH_CATEGORY = "Read Later";
+    private static final String SIXTH_CATEGORY = "Read Later";
 
     // Number of Categories
-    private int mNumberOfCategories = 6;
+    private final int mNumberOfCategories = 6;
 
 
-    public CategoriesPagerAdapter(FragmentManager fm)
+    CategoriesPagerAdapter(FragmentManager fm)
     {
         super(fm);
     }

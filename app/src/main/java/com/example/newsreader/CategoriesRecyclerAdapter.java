@@ -63,23 +63,17 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder != null) {
-            if (holder.getItemViewType() == 0) {
-                ((NormalViewHolder) holder).mHeadLine.setText(mData.get(position).getHeadline());
-                ((NormalViewHolder) holder).mSection.setText(mData.get(position).getSectionName());
+        if (holder.getItemViewType() == 0) {
+            ((NormalViewHolder) holder).mHeadLine.setText(mData.get(position).getHeadline());
+            ((NormalViewHolder) holder).mSection.setText(mData.get(position).getSectionName());
 
-                if (mCategory == 5) {
-                    ((NormalViewHolder) holder).saveButton.setText(R.string.delete_button);
-                }
-
-                // on Save button pressed
-                ((NormalViewHolder) holder).saveButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mSaveButtonListener.onButtonClick(mData.get(position), position);
-                    }
-                });
+            if (mCategory == 5) {
+                ((NormalViewHolder) holder).saveButton.setText(R.string.delete_button);
             }
+
+            // on Save button pressed
+            ((NormalViewHolder) holder).saveButton.setOnClickListener(view ->
+                    mSaveButtonListener.onButtonClick(mData.get(position), position));
         }
     }
 
@@ -104,12 +98,8 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
             ButterKnife.bind(this, itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onItemClick(mData.get(getAdapterPosition()));
-                }
-            });
+            itemView.setOnClickListener(v ->
+                    mListener.onItemClick(mData.get(getAdapterPosition())));
         }
     }
 
@@ -127,13 +117,13 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         void onButtonClick(Article position, int itemPosition);
     }
 
-    public void deleteItem(int position){
+    public void deleteItem(int position) {
         mData.remove(position);
         notifyDataSetChanged();
     }
 
     public void addItems(ArrayList<Article> items, int position) {
-        if (mData != null){
+        if (mData != null) {
             if (position == 5) {
                 mData.clear();
             }

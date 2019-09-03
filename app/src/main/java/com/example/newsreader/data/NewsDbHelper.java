@@ -14,9 +14,8 @@ public class NewsDbHelper extends SQLiteOpenHelper {
     // Database version
     private static final int DATABASE_VERSION = 1;
 
-    public NewsDbHelper(Context context) {
+    NewsDbHelper(Context context) {
         super(context, NEWS_DATABASE_NAME, null, DATABASE_VERSION);
-
     }
 
 

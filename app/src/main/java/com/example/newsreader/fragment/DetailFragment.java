@@ -35,16 +35,14 @@ public class DetailFragment extends Fragment {
 
     private String mUrl = "";
 
-    public DetailFragment() {}
+    public DetailFragment() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_detail_activity, container, false);
-
-        // Inflate the layout for this fragment
-        return v;
+        return inflater.inflate(R.layout.fragment_detail_activity, container, false);
     }
 
     @Override
@@ -53,18 +51,20 @@ public class DetailFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, view);
 
-        String [] data = {};
-        if(this.getArguments().getStringArray(FRAGMENTDATA) != null) {
+        String[] data = {};
+
+        if (this.getArguments() != null) {
             data = this.getArguments().getStringArray(FRAGMENTDATA);
         }
-        final String mThumbnail = data[0];
-        final String mBodyText = data[1];
-        mUrl = data[2];
 
-        GlideApp.with(getContext()).load(mThumbnail).fitCenter().into(mImageView);
+        if (data != null){
+            GlideApp.with(requireContext()).load(data[0]).fitCenter().into(mImageView);
 
-        // Displays HTML content
-        mWebView.loadDataWithBaseURL(null, mBodyText, "text/html", "utf-8", null);
+            // Displays HTML content
+            mWebView.loadDataWithBaseURL(null, data[1], "text/html", "utf-8", null);
+
+            mUrl = data[2];
+        }
     }
 
     @OnClick(R.id.button2)

@@ -8,7 +8,7 @@ public class Fields implements Parcelable {
     private String thumbnail;
     private String body;
 
-    public Fields(String headline, String thumbnail, String body) {
+    Fields(String headline, String thumbnail, String body) {
         this.headline = headline;
         this.thumbnail = thumbnail;
         this.body = body;

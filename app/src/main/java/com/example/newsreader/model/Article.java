@@ -55,7 +55,7 @@ public class Article implements Parcelable {
         dest.writeString(this.body);
     }
 
-    protected Article(Parcel in) {
+    private Article(Parcel in) {
         this.sectionName = in.readString();
         this.webUrl = in.readString();
         this.headline = in.readString();

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -17,12 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 
 import com.example.newsreader.model.Article;
 import com.example.newsreader.model.ArticleResponse;
 import com.example.newsreader.model.Results;
-import com.example.newsreader.network.GetDataService;
 import com.example.newsreader.network.RetrofitClientInstance;
 
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class PanelSearchView extends AppCompatActivity {
     @BindView(R.id.panel_search_progress)
     ProgressBar mSearchProgressBar;
 
-    private ArrayAdapter mAdapter;
+    private ArrayAdapter<String> mAdapter;
 
     private ArrayList<Article> mData = new ArrayList<>();
 
@@ -66,14 +63,11 @@ public class PanelSearchView extends AppCompatActivity {
 
         mListView.setEmptyView(mEmptyView);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent startIntent = new Intent(PanelSearchView.this, DetailActivity.class);
-                startIntent.putExtra(DETAILBUNDLE, mData.get(i));
-                startActivity(startIntent);
-                finish();
-            }
+        mListView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent startIntent = new Intent(PanelSearchView.this, DetailActivity.class);
+            startIntent.putExtra(DETAILBUNDLE, mData.get(i));
+            startActivity(startIntent);
+            finish();
         });
     }
 
@@ -84,7 +78,7 @@ public class PanelSearchView extends AppCompatActivity {
 
         MenuItem mSearch = menu.findItem(R.id.action_search);
 
-        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(mSearch);
+        SearchView mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint("Search");
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -113,8 +107,7 @@ public class PanelSearchView extends AppCompatActivity {
     private void loadData(String query) {
 
         Call<ArticleResponse> call = RetrofitClientInstance.getRetrofitInstance().
-                getData(GetDataService.INITIAL_DATE, GetDataService.END_DATE, GetDataService.FIELDS,
-                        1, "20", query, GetDataService.VALUE_KEY);
+                getData(1, query);
 
         call.enqueue(new Callback<ArticleResponse>() {
             @Override
@@ -158,7 +151,7 @@ public class PanelSearchView extends AppCompatActivity {
         }
 
         if (mAdapter == null) {
-            mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listData);
+            mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
             mListView.setAdapter(mAdapter);
         } else {
             mAdapter.addAll(listData);
