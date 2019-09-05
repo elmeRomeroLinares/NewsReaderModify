@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO decide which mode is active and perform setDefaultNightMode()
     @OnClick(R.id.day_night_action_button)
     public void performDayNight() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         int currentNightMode = getResources().getConfiguration().uiMode

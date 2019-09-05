@@ -11,7 +11,6 @@ public class CoreApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        CoreApp myApplication = this;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
